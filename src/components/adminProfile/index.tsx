@@ -3,7 +3,7 @@ import React from 'react';
 
 import OverviewPage from '../overviewPage';
 
-const AdminProfile = (): JSX.Element => {
+const AdminProfile = (): React.FC => {
   const { session } = useSession();
 
   return <div>{session.info.isLoggedIn && <OverviewPage />}</div>;

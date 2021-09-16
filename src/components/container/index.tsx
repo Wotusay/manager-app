@@ -7,9 +7,9 @@ import { ROUTES } from '../../consts';
 import AdminProfile from '../adminProfile/index';
 import Nav from '../nav';
 
-const Container = (): JSX.Element => {
+const Container = (): React.FC => {
   return (
-    <SessionProvider>
+    <SessionProvider children>
       <Nav />
       <Switch>
         <Route path={ROUTES.home}>

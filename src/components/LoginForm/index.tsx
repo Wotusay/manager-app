@@ -2,7 +2,7 @@ import { LoginButton } from '@inrupt/solid-ui-react';
 import React from 'react';
 const idp = 'https://solidcommunity.net';
 
-const LoginForm = (): JSX.Element => {
+const LoginForm = (): React.FC => {
   return (
     <LoginButton
       authOptions={{ clientName: 'Cronos Covid App' }}

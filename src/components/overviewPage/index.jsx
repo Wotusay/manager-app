@@ -9,7 +9,7 @@ import { useStores } from '../../contexts/index';
 const OverviewPage = () => {
   const { session } = useSession();
   const { solidStore } = useStores();
-  const { webId } = session.info;
+  const webId = session.info.webId;
   const [user, setUser] = useState('');
   const [file, setFile] = useState(
     `https://${user}.solidcommunity.net/cronos/covid/covid__info`,
@@ -36,19 +36,19 @@ const OverviewPage = () => {
     <>
       <CombinedDataProvider datasetUrl={webId} thingUrl={webId}>
         <div className="flex flex-col content-center justify-center">
-          <p className="font-bold text-2xl mt-10 flex gap-1 mb-7 content-center justify-center">
+          <p className="flex content-center justify-center gap-1 mt-10 text-2xl font-bold mb-7">
             {<Text property={FOAF.name.iri.value} />}
           </p>
         </div>
       </CombinedDataProvider>
       <form
-        className="grid gap-7 mb-7 content-center justify-center "
-        onSubmit={e => handleSubmit(e)}
+        className="grid content-center justify-center gap-7 mb-7 "
+        onSubmit={handleSubmit}
       >
         <input
           placeholder="Username"
           className="border-b-2 border-gray-900"
-          onChange={e => onInputChange(e)}
+          onChange={onInputChange}
           required
           type="text"
           id="user-access"
@@ -56,7 +56,7 @@ const OverviewPage = () => {
 
         <input
           type="submit"
-          className="font-semibold text-white bg-indigo-700 w-44 rounded-sm p-5"
+          className="p-5 font-semibold text-white bg-indigo-700 rounded-sm w-44"
           value="Show information"
         />
       </form>

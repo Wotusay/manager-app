@@ -6,7 +6,7 @@ import { ROUTES } from '../../consts/index';
 
 import LoginForm from '../LoginForm';
 
-const Nav = (): JSX.Element => {
+const Nav = (): React.FC => {
   const { session, sessionRequestInProgress } = useSession();
 
   return (

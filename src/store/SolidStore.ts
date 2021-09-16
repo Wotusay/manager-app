@@ -13,7 +13,10 @@ class SolidStore {
     this.solidService = new SolidService();
   }
 
-  readCovidData = async (session: any, fileLink: string) => {
+  readCovidData = async (
+    session: any,
+    fileLink: string,
+  ): Promise<Array<any>> => {
     const listItems = await this.solidService.getSolidData(fileLink, session);
     return listItems;
   };
