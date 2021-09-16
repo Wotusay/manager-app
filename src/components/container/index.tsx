@@ -1,19 +1,19 @@
 import { SessionProvider } from '@inrupt/solid-ui-react';
-import React, { FC } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ROUTES } from 'src/consts';
 
-import Content from '../content';
+import { ROUTES } from '../../consts';
 
+import AdminProfile from '../adminProfile/index';
 import Nav from '../nav';
 
-const Container = () => {
+const Container = (): JSX.Element => {
   return (
-    <SessionProvider children>
+    <SessionProvider>
       <Nav />
       <Switch>
         <Route path={ROUTES.home}>
-          <Content />
+          <AdminProfile />
         </Route>
       </Switch>
     </SessionProvider>
