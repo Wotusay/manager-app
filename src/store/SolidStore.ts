@@ -13,12 +13,24 @@ class SolidStore {
     this.solidService = new SolidService();
   }
 
-  readCovidData = async (
-    session: any,
-    fileLink: string,
-  ): Promise<Array<any>> => {
+  readCovidData = async (session: any, fileLink: string): Promise<any> => {
+    // const { webId } = session.info;
+    const { sessionId } = session.info;
+
     const listItems = await this.solidService.getSolidData(fileLink, session);
-    return listItems;
+    if (listItems !== undefined) {
+      listItems.webId = fileLink;
+      this.rootStore.workerStore.addWorker(
+        fileLink,
+        listItems.date,
+        listItems.type,
+        listItems.validate,
+        sessionId,
+      );
+      return 'User added!';
+    } else {
+      return 'User not found...';
+    }
   };
 }
 

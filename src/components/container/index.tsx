@@ -6,12 +6,16 @@ import { ROUTES } from '../../consts';
 
 import AdminProfile from '../adminProfile/index';
 import Nav from '../nav';
+import WorkerProfile from '../workerProfile';
 
 const Container = (): React.FC => {
   return (
     <SessionProvider children>
       <Nav />
       <Switch>
+        <Route exact strict path={ROUTES.workerDetail.path}>
+          <WorkerProfile />
+        </Route>
         <Route path={ROUTES.home}>
           <AdminProfile />
         </Route>

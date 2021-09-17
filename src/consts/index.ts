@@ -1,7 +1,6 @@
 const ROUTES = {
   home: '/',
-  manager: '/manager',
-  worker: '/worker',
+  workerDetail: { path: '/worker/:id', to: '/worker/' },
 };
 
 export { ROUTES };

@@ -13,31 +13,39 @@ class SolidService {
     this.listItems = [];
   }
 
-  getSolidData = async (
-    fileLink: string,
-    session: any,
-  ): Promise<Array<any>> => {
+  getSolidData = async (fileLink: string, session: any): Promise<any> => {
     const fetchSessionData = session.fetch;
-    const savedCovidItems = await getSolidDataset(fileLink, {
-      fetch: fetchSessionData,
-    });
+    console.info(fileLink);
+    try {
+      const savedCovidItems = await getSolidDataset(fileLink, {
+        fetch: fetchSessionData,
+      });
 
-    const items = getThingAll(savedCovidItems);
-    let listedSolidStrings;
+      const items = getThingAll(savedCovidItems);
+      const listedSolidStrings = { date: '', type: '', validate: '' };
 
-    for (let i = 0; i < items.length; i++) {
-      const item = getStringNoLocale(items[i], SCHEMA_INRUPT.name);
-      if (item !== null && this.listItems.length != 3) {
-        this.listItems.push(item);
+      for (let i = 0; i < items.length; i++) {
+        const item = getStringNoLocale(items[i], SCHEMA_INRUPT.name);
+        console.info(item);
+        if (item !== undefined && this.listItems.length != 3) {
+          this.listItems.push(item);
+        } else {
+          return;
+        }
       }
-    }
 
-    if (this.listItems.length === 3 && this.listItems != undefined) {
-      listedSolidStrings = this.listItems;
-      this.listItems = [];
-    }
+      if (this.listItems.length === 3 && this.listItems !== undefined) {
+        listedSolidStrings.date = this.listItems[0];
+        listedSolidStrings.type = this.listItems[1];
+        listedSolidStrings.validate = this.listItems[2];
 
-    return listedSolidStrings;
+        this.listItems = [];
+      }
+
+      return listedSolidStrings;
+    } catch (error) {
+      return;
+    }
   };
 }
 
