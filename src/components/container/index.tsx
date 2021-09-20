@@ -13,7 +13,7 @@ const Container = (): React.FC => {
     <SessionProvider children>
       <Nav />
       <Switch>
-        <Route exact strict path={ROUTES.workerDetail.path}>
+        <Route exact path={ROUTES.workerDetail.path}>
           <WorkerProfile />
         </Route>
         <Route path={ROUTES.home}>

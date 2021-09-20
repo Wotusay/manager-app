@@ -41,7 +41,7 @@ const AddWorkers = (): React.FC => {
         <input
           type="submit"
           className="p-5 font-semibold text-white bg-indigo-700 rounded-sm w-44"
-          value="Show information"
+          value="Add user to list!"
         />
       </form>
     </>

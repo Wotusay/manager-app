@@ -7,6 +7,10 @@ class WorkerStore {
     this.workers = [];
   }
 
+  findObjWithUsername = (username: string): any => {
+    return this.workers.find(worker => worker.username === username);
+  };
+
   addWorker = (
     link: string,
     date: string,
@@ -42,6 +46,7 @@ class WorkerStore {
 
 decorate(WorkerStore, {
   addWorker: action,
+  findObjWithUsername: action,
   workers: observable,
 });
 
