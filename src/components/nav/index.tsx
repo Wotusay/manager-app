@@ -15,12 +15,6 @@ const Nav = (): React.FC => {
         >
           Logout
         </button>
-        <button
-          onClick={uiStore.handleLogin}
-          className="float-right p-5 font-semibold text-white bg-green-700 rounded-sm"
-        >
-          Login
-        </button>
       </div>
       <div className="text-xl font-semibold p-7">
         <NavLink className="text-xl font-semibold " to={ROUTES.home}>

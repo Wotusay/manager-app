@@ -2,8 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { ROUTES } from '../../consts';
-
-import AdminProfile from '../adminProfile/index';
+import LoginPage from '../loginPage';
 import Nav from '../nav';
 
 const Container = (): React.FC => {
@@ -12,7 +11,7 @@ const Container = (): React.FC => {
       <Nav />
       <Switch>
         <Route path={ROUTES.home}>
-          <AdminProfile />
+          <LoginPage />
         </Route>
       </Switch>
     </>

@@ -13,7 +13,7 @@ class AuthService {
   constructor(firebase: any, authState: any) {
     this.auth = getAuth(firebase);
     this.provider = new OAuthProvider('microsoft.com').setCustomParameters({
-      tenant: '49c3d703-3579-47bf-a888-7c913fbdced9',
+      tenant: process.env.REACT_APP_tenant as string,
       prompt: 'consent',
     });
     onAuthStateChanged(this.auth, (user: any) => {
