@@ -58,8 +58,9 @@ class UIStore {
           group: this.data.group,
         }),
       );
-
-      console.info(this.currentUser);
+      this.rootStore.workerStore.getAllWorkersInformation(
+        this.currentUser.group,
+      );
     }
     if (!this.data && !this.data.name) {
       this.rootStore.userStore.create(

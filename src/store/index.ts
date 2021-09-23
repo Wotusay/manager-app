@@ -1,6 +1,5 @@
 import * as firebase from 'firebase/app';
 
-import SolidStore from './SolidStore';
 import UIStore from './UIStore';
 import UserStore from './UserStore';
 import WorkerStore from './WorkerStore';
@@ -24,8 +23,6 @@ class RootStore {
     };
     this.firebase = firebase.initializeApp(firebaseConfig);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    this.solidStore = new SolidStore(this);
     this.uiStore = new UIStore(this);
     this.workerStore = new WorkerStore(this);
     this.userStore = new UserStore(this);

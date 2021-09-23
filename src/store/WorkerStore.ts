@@ -1,52 +1,43 @@
-import { decorate, action, observable } from 'mobx';
+import { decorate, observable } from 'mobx';
+import WorkerService from 'src/services/WorkerService';
+
+import Worker from '../models/Worker';
 class WorkerStore {
   rootStore: any;
   workers: any;
+  workerService: any;
   constructor(rootStore: any) {
     this.rootStore = rootStore;
     this.workers = [];
+    this.workerService = new WorkerService(this.rootStore.firebase);
   }
 
-  findObjWithUsername = (username: string): any => {
-    return this.workers.find(worker => worker.username === username);
+  retievedData = (data: any): any => {
+    if (data) {
+      Object.keys(data).forEach(key => {
+        const item = data[key];
+        this.workers.push(
+          new Worker({
+            username: item.username,
+            validationDate: item.validate,
+            startDate: item.date,
+          }),
+        );
+      });
+
+      console.info(this.workers);
+    }
   };
 
-  addWorker = (
-    link: string,
-    date: string,
-    type: string,
-    validate: string,
-    id: string,
-  ): any => {
-    const spiltLink = link.split('/');
-    const spiltDot = spiltLink[2].split('.');
-    const username = spiltDot[0];
-    const userProfileLink = `https://${spiltLink[2]}/profile/card#me`;
-    const worker = {
-      link,
-      date,
-      type,
-      validate,
-      id,
-      userProfileLink,
-      username,
-    };
-    console.info(worker);
-    const workerExist = this.workers.findIndex(
-      item => item.link === worker.link,
+  getAllWorkersInformation = (group: string): any => {
+    this.workerService.getAllUserInformation(
+      group.toLowerCase(),
+      this.retievedData,
     );
-
-    if (workerExist === -1) {
-      this.workers.push(worker);
-    } else {
-      return;
-    }
   };
 }
 
 decorate(WorkerStore, {
-  addWorker: action,
-  findObjWithUsername: action,
   workers: observable,
 });
 
