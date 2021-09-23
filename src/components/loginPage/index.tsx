@@ -7,9 +7,16 @@ import LoginComp from '../loginComp';
 
 const LoginPage = (): React.FC => {
   const { uiStore } = useStores();
-
   return useObserver(() => (
-    <div>{uiStore.isLoggedIn ? 'yes ' : <LoginComp />}</div>
+    <div className="flex justify-center">
+      {uiStore.isLoggedIn && uiStore.currentUser ? (
+        <p className="text-xl font-medium">
+          {uiStore.currentUser.name} -- {uiStore.currentUser.group}
+        </p>
+      ) : (
+        <LoginComp />
+      )}
+    </div>
   ));
 };
 

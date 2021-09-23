@@ -2,6 +2,7 @@ import * as firebase from 'firebase/app';
 
 import SolidStore from './SolidStore';
 import UIStore from './UIStore';
+import UserStore from './UserStore';
 import WorkerStore from './WorkerStore';
 
 class RootStore {
@@ -9,6 +10,7 @@ class RootStore {
   workerStore: any;
   firebase: any;
   uiStore: any;
+  userStore: any;
 
   constructor() {
     const firebaseConfig = {
@@ -26,6 +28,7 @@ class RootStore {
     this.solidStore = new SolidStore(this);
     this.uiStore = new UIStore(this);
     this.workerStore = new WorkerStore(this);
+    this.userStore = new UserStore(this);
   }
 }
 
