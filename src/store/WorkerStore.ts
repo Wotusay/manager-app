@@ -33,6 +33,13 @@ class WorkerStore {
           startDate: item.date,
         }),
       );
+      this.workers.map(worker => {
+        if (worker.checkIfStillValidWithAfterDate(new Date())) {
+          worker.unknown = false;
+        } else {
+          worker.unknown = true;
+        }
+      });
     }
   };
 
@@ -43,9 +50,8 @@ class WorkerStore {
     );
   };
 
-  filterWithDate = async (dateOne: string, dateTwo: string): Promise<any> => {
-    await this.workers.map((worker: any) => {
-      console.info(worker.checkIfAvailable(dateOne, dateTwo));
+  filterWithDate = (dateOne: string, dateTwo: string): any => {
+    this.workers.map((worker: any) => {
       if (worker.checkIfAvailable(dateOne, dateTwo)) {
         worker.unknown = false;
       }
@@ -53,8 +59,6 @@ class WorkerStore {
         worker.unknown = true;
       }
     });
-
-    console.info(this.workers);
   };
 }
 

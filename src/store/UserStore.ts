@@ -11,7 +11,6 @@ class UserStore {
 
   createUser = async (user: any): Promise<any> => {
     await this.userService.create(user);
-    console.info('done!');
   };
 
   userRegisterd = async (username: string, sendData: any): Promise<any> => {

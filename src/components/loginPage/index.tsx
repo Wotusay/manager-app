@@ -14,12 +14,6 @@ const LoginPage = (): React.FC => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
 
-  const handleClick = () => {
-    if (endDate !== null) {
-      workerStore.filterWithDate(startDate, endDate);
-    }
-  };
-
   const dateChanger = (dates: any) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -48,12 +42,6 @@ const LoginPage = (): React.FC => {
               endDate={endDate}
               selectsRange
             />
-            <button
-              onClick={handleClick}
-              className="p-2 font-medium text-white bg-gray-900 rounded-lg"
-            >
-              Filter
-            </button>
           </div>
           <OverviewPage />
         </>

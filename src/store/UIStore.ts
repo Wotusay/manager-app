@@ -49,7 +49,6 @@ class UIStore {
       this.sendData,
     );
     if (this.data.username && this.data) {
-      console.info(this.data);
       this.setCurrentUser(
         new User({
           id: this.data.id,

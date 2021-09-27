@@ -11,7 +11,6 @@ class UserService {
     return await get(child(dbRef, `users/${username}`))
       .then(async snapshot => {
         if (snapshot.exists()) {
-          console.info(snapshot.exists());
           return sendData(snapshot.val());
         } else {
           return false;
