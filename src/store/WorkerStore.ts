@@ -1,4 +1,4 @@
-import { decorate, observable } from 'mobx';
+import { action, decorate, observable } from 'mobx';
 import WorkerService from 'src/services/WorkerService';
 
 import Worker from '../models/Worker';
@@ -16,16 +16,23 @@ class WorkerStore {
     if (data) {
       Object.keys(data).forEach(key => {
         const item = data[key];
-        this.workers.push(
-          new Worker({
-            username: item.username,
-            validationDate: item.validate,
-            startDate: item.date,
-          }),
-        );
+        this.addWorker(item);
       });
+    }
+  };
 
-      console.info(this.workers);
+  addWorker = (item: any): any => {
+    const workerExists = this.workers.findIndex(
+      worker => worker.username === item.username,
+    );
+    if (workerExists === -1) {
+      this.workers.push(
+        new Worker({
+          username: item.username,
+          validationDate: item.validate,
+          startDate: item.date,
+        }),
+      );
     }
   };
 
@@ -35,10 +42,27 @@ class WorkerStore {
       this.retievedData,
     );
   };
+
+  filterWithDate = async (dateOne: string, dateTwo: string): Promise<any> => {
+    await this.workers.map((worker: any) => {
+      console.info(worker.checkIfAvailable(dateOne, dateTwo));
+      if (worker.checkIfAvailable(dateOne, dateTwo)) {
+        worker.unknown = false;
+      }
+      if (!worker.checkIfAvailable(dateOne, dateTwo)) {
+        worker.unknown = true;
+      }
+    });
+
+    console.info(this.workers);
+  };
 }
 
 decorate(WorkerStore, {
   workers: observable,
+  retievedData: action,
+  addWorker: action,
+  filterWithDate: action,
 });
 
 export default WorkerStore;
