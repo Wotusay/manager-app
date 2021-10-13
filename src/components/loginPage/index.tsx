@@ -9,7 +9,7 @@ import { useStores } from '../../contexts/index';
 import LoginComp from '../loginComp';
 import OverviewPage from '../overviewPage';
 
-const LoginPage = (): React.FC => {
+const LoginPage = (): JSX.Element => {
   const { uiStore, workerStore } = useStores();
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);

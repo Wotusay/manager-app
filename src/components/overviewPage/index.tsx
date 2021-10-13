@@ -4,7 +4,7 @@ import React from 'react';
 
 import { useStores } from '../../contexts/index';
 
-const OverviewPage = (): React.FC => {
+const OverviewPage = (): JSX.Element => {
   const { workerStore } = useStores();
   return useObserver(() => (
     <>

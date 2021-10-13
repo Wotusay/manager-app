@@ -2,7 +2,7 @@ import React from 'react';
 
 import OverviewPage from '../overviewPage';
 
-const AdminProfile = (): React.FC => {
+const AdminProfile = (): JSX.Element => {
   return (
     <div>
       <OverviewPage />

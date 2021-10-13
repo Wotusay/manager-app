@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../consts/index';
 import { useStores } from '../../contexts/index';
 
-const Nav = (): React.FC => {
+const Nav = (): React.ReactElement => {
   const { uiStore } = useStores();
   return useObserver(() => (
     <>

@@ -5,7 +5,7 @@ import { ROUTES } from '../../consts';
 import LoginPage from '../loginPage';
 import Nav from '../nav';
 
-const Container = (): React.FC => {
+const Container = (): JSX.Element => {
   return (
     <>
       <Nav />

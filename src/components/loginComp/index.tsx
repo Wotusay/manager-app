@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useStores } from '../../contexts/index';
 
-const LoginComp = (): React.FC => {
+const LoginComp = (): JSX.Element => {
   const { uiStore } = useStores();
 
   return (
