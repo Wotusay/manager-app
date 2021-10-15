@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 
 import { useStores } from '../../contexts/index';
+import Worker from '../worker';
 
 const OverviewPage = (): JSX.Element => {
   const { workerStore, uiStore } = useStores();
@@ -41,16 +42,7 @@ const OverviewPage = (): JSX.Element => {
         </div>
         <div className="grid w-2/4 grid-flow-col gap-4 mt-10 ml-28 justify-right">
           {workerStore.workers.map(worker => {
-            return (
-              <div
-                className={`p-6 text-xl text-white font-regular rounded-2xl shadow-xl ${
-                  !worker.unknown ? 'bg-oceanBlue' : 'bg-unkownColor'
-                }`}
-                key={worker.username}
-              >
-                <p> {worker.username}</p>
-              </div>
-            );
+            return <Worker worker={worker} key={worker.username} />;
           })}
         </div>
       </div>
