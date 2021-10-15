@@ -33,11 +33,12 @@ module.exports = {
       green: colors.green,
       whiteAccent: '#FAFAFA',
       navyBlue: '#383874',
-      oceanBlue: '#023AFF',
+      oceanBlue: '#4D6CFA',
       blueAccent: '#EEF1FA',
       salamonPink: '#ED4949',
       appelGreen: '#20B741',
       textColor: '#A7A8E3',
+      unkownColor: '#DCDFF2',
     },
   },
   variants: {
