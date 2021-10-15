@@ -3,7 +3,7 @@ import { v4 } from 'uuid';
 class User {
   id: string;
   name: string;
-  group: string;
+  group: string | undefined;
   email: string;
 
   constructor({
@@ -15,7 +15,7 @@ class User {
     id?: string;
     name: string;
     email: string;
-    group: string;
+    group: string | undefined;
   }) {
     this.id = id;
     this.name = name;

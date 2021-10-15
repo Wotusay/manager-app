@@ -5,11 +5,10 @@ import UserStore from './UserStore';
 import WorkerStore from './WorkerStore';
 
 class RootStore {
-  solidStore: any;
-  workerStore: any;
+  workerStore: WorkerStore;
   firebase: any;
-  uiStore: any;
-  userStore: any;
+  uiStore: UIStore;
+  userStore: UserStore;
 
   constructor() {
     const firebaseConfig = {

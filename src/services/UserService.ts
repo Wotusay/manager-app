@@ -21,7 +21,7 @@ class UserService {
       });
   };
 
-  create = async (user: any): Promise<any> => {
+  create = async (user: any): Promise<void> => {
     set(ref(this.db, `users/${user.name}`), {
       username: user.name,
       id: user.uid,

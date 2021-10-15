@@ -2,17 +2,19 @@ import { action, decorate, observable } from 'mobx';
 import WorkerService from 'src/services/WorkerService';
 
 import Worker from '../models/Worker';
+
+import RootStore from './index';
 class WorkerStore {
-  rootStore: any;
-  workers: any;
-  workerService: any;
+  rootStore: RootStore;
+  workers: Worker[];
+  workerService: WorkerService;
   constructor(rootStore: any) {
     this.rootStore = rootStore;
     this.workers = [];
     this.workerService = new WorkerService(this.rootStore.firebase);
   }
 
-  retievedData = (data: any): any => {
+  retievedData = (data: any): void => {
     if (data) {
       Object.keys(data).forEach(key => {
         const item = data[key];
@@ -21,7 +23,7 @@ class WorkerStore {
     }
   };
 
-  addWorker = (item: any): any => {
+  addWorker = (item: any): void => {
     const workerExists = this.workers.findIndex(
       worker => worker.username === item.username,
     );
@@ -43,14 +45,14 @@ class WorkerStore {
     }
   };
 
-  getAllWorkersInformation = (group: string): any => {
+  getAllWorkersInformation = (group: string | undefined): void => {
     this.workerService.getAllUserInformation(
-      group.toLowerCase(),
+      group?.toLowerCase(),
       this.retievedData,
     );
   };
 
-  filterWithDate = (dateOne: string, dateTwo: string): any => {
+  filterWithDate = (dateOne: string, dateTwo: string): void => {
     this.workers.map((worker: any) => {
       if (worker.checkIfAvailable(dateOne, dateTwo)) {
         worker.unknown = false;
