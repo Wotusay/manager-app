@@ -4,13 +4,15 @@ import { action, decorate, observable } from 'mobx';
 import User from '../models/User';
 import AuthService from '../services/AuthService';
 
+import RootStore from './index';
+
 class UIStore {
-  rootStore: any;
-  authService: any;
+  rootStore: RootStore;
+  authService: AuthService;
   isLoggedIn: boolean;
-  currentUser: any;
+  currentUser: User | undefined;
   data: any;
-  constructor(rootStore: any) {
+  constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     this.currentUser = undefined;
@@ -19,15 +21,15 @@ class UIStore {
     this.authService = new AuthService(this.rootStore.firebase, this.authState);
   }
 
-  handleLogin = async (): Promise<any> => {
+  handleLogin = async (): Promise<void> => {
     await this.authService.signIn();
   };
 
-  handleLogout = async (): Promise<any> => {
+  handleLogout = async (): Promise<void> => {
     await this.authService.logOut();
   };
 
-  authState = async (user: any): Promise<any> => {
+  authState = async (user: any): Promise<void> => {
     if (user) {
       // this.setCurrentUser(user);
       await this.registerUser(user);
@@ -38,12 +40,11 @@ class UIStore {
     }
   };
 
-  sendData = (data: any): any => {
+  sendData = (data: any): void => {
     this.data = data;
-    return;
   };
 
-  registerUser = async (user: any): Promise<any> => {
+  registerUser = async (user: any): Promise<void> => {
     await this.rootStore.userStore.userRegisterd(
       user.displayName,
       this.sendData,
@@ -58,11 +59,11 @@ class UIStore {
         }),
       );
       this.rootStore.workerStore.getAllWorkersInformation(
-        this.currentUser.group,
+        this.currentUser?.group,
       );
     }
     if (!this.data && !this.data.name) {
-      this.rootStore.userStore.create(
+      this.rootStore.userStore.createUser(
         new User({
           id: user.uid,
           name: user.displayName,
@@ -73,7 +74,7 @@ class UIStore {
     }
   };
 
-  setCurrentUser(user: any): any {
+  setCurrentUser(user: User | undefined): void {
     this.currentUser = user;
   }
 }

@@ -7,7 +7,7 @@ class WorkerService {
   }
 
   getAllUserInformation = async (
-    group: string,
+    group: string | undefined,
     retievedData: any,
   ): Promise<any> => {
     return await get(ref(this.db, `covid-items/${group}`))

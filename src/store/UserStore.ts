@@ -1,15 +1,17 @@
 import { action, decorate } from 'mobx';
 
 import UserService from '../services/UserService';
+
+import RootStore from './index';
 class UserStore {
-  rootStore: any;
-  userService: any;
-  constructor(rootStore: any) {
+  rootStore: RootStore;
+  userService: UserService;
+  constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     this.userService = new UserService(this.rootStore.firebase);
   }
 
-  createUser = async (user: any): Promise<any> => {
+  createUser = async (user: any): Promise<void> => {
     await this.userService.create(user);
   };
 
