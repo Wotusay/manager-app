@@ -31,16 +31,15 @@ class WorkerStore {
       this.workers.push(
         new Worker({
           username: item.username,
-          validationDate: item.validate,
+          validationDate: item.validationDate,
           startDate: item.date,
         }),
       );
       this.workers.map(worker => {
-        if (worker.checkIfStillValidWithAfterDate(new Date())) {
-          worker.unknown = false;
-        } else {
-          worker.unknown = true;
-        }
+        worker.unknown = !worker.checkIfAvailable({
+          dateOne: worker.validationDate,
+          dateTwo: new Date(),
+        });
       });
     }
   };
@@ -52,12 +51,11 @@ class WorkerStore {
     );
   };
 
-  filterWithDate = (dateOne: string, dateTwo: string): void => {
+  filterWithDate = (dateOne: Date, dateTwo: Date): void => {
     this.workers.map((worker: any) => {
-      if (worker.checkIfAvailable(dateOne, dateTwo)) {
+      if (worker.checkIfAvailable({ dateOne, dateTwo })) {
         worker.unknown = false;
-      }
-      if (!worker.checkIfAvailable(dateOne, dateTwo)) {
+      } else {
         worker.unknown = true;
       }
     });

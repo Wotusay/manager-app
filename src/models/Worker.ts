@@ -20,7 +20,7 @@ class Worker {
     this.unknown = false;
   }
 
-  checkIfStillValidWithBeforeDate = (date: string): boolean => {
+  checkIfStillValidWithBeforeDate = (date: Date | string): boolean => {
     const expired = dayjs(date).isBefore(
       dayjs(this.validationDate, 'YYYY-MM-DD'),
     );
@@ -31,7 +31,7 @@ class Worker {
     }
   };
 
-  checkIfStillValidWithAfterDate = (date: string | Date): boolean => {
+  checkIfStillValidWithAfterDate = (date: Date | string): boolean => {
     const expired = dayjs(date).isAfter(
       dayjs(this.validationDate, 'YYYY-MM-DD'),
     );
@@ -42,7 +42,13 @@ class Worker {
     }
   };
 
-  checkIfAvailable = (dateOne: string, dateTwo: string): boolean => {
+  checkIfAvailable = ({
+    dateOne,
+    dateTwo,
+  }: {
+    dateOne: Date | string;
+    dateTwo: Date | string;
+  }): any => {
     if (
       this.checkIfStillValidWithBeforeDate(dateTwo) &&
       this.checkIfStillValidWithAfterDate(dateOne)
